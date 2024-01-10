@@ -3,7 +3,7 @@ extern crate sdl2;
 use std::thread;
 use sdl2::{pixels::Color, event::Event};
 use std::time::Duration;
-use sdl2::rect::{Rect};
+use sdl2::rect::Rect;
 
 fn calculate_color(x_position: f32, y_position : f32, size : u32) -> Color{
     let new_size = (size / 2) as f32;
@@ -64,7 +64,7 @@ fn main (){
                     let y_position = (rows as i32) * rect_size;
                     let alive_rect = Rect::new(x_position, y_position, rectangle_size, rectangle_size);
                     canvas.set_draw_color(calculate_color(x_position as f32, y_position as f32, window_size));
-                    canvas.draw_rect(alive_rect);
+                    let _ = canvas.draw_rect(alive_rect);
                 }
             }
         }
@@ -79,7 +79,7 @@ fn main (){
         // Capture event to quit window if user clicks
         for event in event_log.poll_iter() {
             match event {
-                Event::Quit { timestamp } => {
+                Event::Quit { .. } => {
                     break 'main_loop;
                 }
                 _ => {}
